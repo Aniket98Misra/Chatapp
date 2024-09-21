@@ -6,7 +6,7 @@ import messageRoutes from "./routes/message.routes.js";
 import userRoutes from "./routes/user.routes.js";
 import connectToMongoDB from "./db/connectToMongoDB.js";
 import mongoose from "mongoose";
-const app = express();
+import { app, server } from "./socket/socket.js";
 const PORT = process.env.PORT || 5000;
 dotenv.config();
 app.use(express.json());
@@ -34,7 +34,7 @@ mongoose
   .catch((err) => {
     console.error("Connection error:", err);
   });
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   connectToMongoDB();
   console.log(`Server Running on Port ${PORT}`);
 });
